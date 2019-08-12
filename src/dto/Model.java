@@ -35,4 +35,27 @@ public class Model {
 				", dayPrice=" + dayPrice +
 				'}';
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Model)) return false;
+
+		Model model = (Model) o;
+
+		if (tank != model.tank) return false;
+		if (Double.compare(model.dayPrice, dayPrice) != 0) return false;
+		return modelName != null ? modelName.equals(model.modelName) : model.modelName == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result;
+		long temp;
+		result = modelName != null ? modelName.hashCode() : 0;
+		result = 31 * result + tank;
+		temp = Double.doubleToLongBits(dayPrice);
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
 }

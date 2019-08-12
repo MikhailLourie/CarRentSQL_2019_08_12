@@ -99,10 +99,37 @@ public class Record {
 		return "Record [id=" + id + ", car=" + car + ", driver=" + driver + ", rentDate=" + rentDate + ", returnDate="
 				+ returnDate + ", rentDays=" + rentDays + ", tankPercent=" + tankPercent + ", cost=" + cost + "]";
 	}
-	
-	
-	
-	
-	
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Record)) return false;
+
+		Record record = (Record) o;
+
+		if (id != record.id) return false;
+		if (rentDays != record.rentDays) return false;
+		if (tankPercent != record.tankPercent) return false;
+		if (Double.compare(record.cost, cost) != 0) return false;
+		if (car != null ? !car.equals(record.car) : record.car != null) return false;
+		if (driver != null ? !driver.equals(record.driver) : record.driver != null) return false;
+		if (rentDate != null ? !rentDate.equals(record.rentDate) : record.rentDate != null) return false;
+		return returnDate != null ? returnDate.equals(record.returnDate) : record.returnDate == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result;
+		long temp;
+		result = id;
+		result = 31 * result + (car != null ? car.hashCode() : 0);
+		result = 31 * result + (driver != null ? driver.hashCode() : 0);
+		result = 31 * result + (rentDate != null ? rentDate.hashCode() : 0);
+		result = 31 * result + (returnDate != null ? returnDate.hashCode() : 0);
+		result = 31 * result + rentDays;
+		result = 31 * result + tankPercent;
+		temp = Double.doubleToLongBits(cost);
+		result = 31 * result + (int) (temp ^ (temp >>> 32));
+		return result;
+	}
 }

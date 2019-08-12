@@ -28,7 +28,22 @@ public class Driver {
 	public String toString() {
 		return "Driver [id=" + id + ", name=" + name + "]";
 	}
-	
-	
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Driver)) return false;
+
+		Driver driver = (Driver) o;
+
+		if (id != driver.id) return false;
+		return name != null ? name.equals(driver.name) : driver.name == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id;
+		result = 31 * result + (name != null ? name.hashCode() : 0);
+		return result;
+	}
 }
